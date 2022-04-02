@@ -13,3 +13,104 @@ body {
 
   background-color: lightblue;
 }
+
+// GLOBAL CLASSES
+.flex-row {
+	display: flex;
+}
+
+.no-style-btn {
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+}
+
+
+// Header
+header {
+	@media only screen and (max-width: 968px) {
+		height: 15vh;
+
+		ul {
+			flex-direction: column;
+			gap: 20px;
+		}
+	}
+
+	background-color: rgb(83, 83, 83);
+	color: white;
+	display: flex;
+	gap: 20px;
+	padding: 10px 40px;
+	align-items: center;
+	justify-content: space-around;
+	height: 8vh;
+
+	.header--logo {
+		height: 50px;
+		width: 50px;
+		margin-right: 18px;
+	}
+
+	.header--home-btn {
+		display: flex;
+		align-items: center;
+		font-size: 1.4rem;
+		font-weight: 600;
+		color: white;
+	}
+
+	ul {
+		list-style-type: none;
+		@media only screen and (min-width: 969px) {
+			gap: 40px;
+		}
+
+		display: flex;
+		.header--nav-btn {
+			font-size: 1.4rem;
+			font-weight: 600;
+			color: white;
+		}
+	}
+
+	.header--cart-btn {
+		position: relative;
+	}
+	.header--cart-img {
+		height: 70px;
+		width: 70px;
+	}
+
+	.cart-amount {
+		position: absolute;
+		bottom: 5px;
+		right: 3px;
+		color: white;
+		font-size: 1.2rem;
+		background-color: rgba(93, 165, 65, 0.726);
+		border-radius: 8px;
+		padding: 5px;
+	}
+
+}
+
+// Main Shop page
+.shop {
+	padding: min(40px, 5vw);
+}
+
+.shop--cards {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, 250px);
+	grid-template-rows: repeat(auto-fit, 330px);
+}
+.card {
+	border: solid black 2px;
+	border-radius: 10px;
+
+	height: 300px;
+	width: 200px;
+	background-color: rgb(147, 194, 159);
+	padding: 10px;
+}
