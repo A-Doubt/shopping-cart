@@ -5,20 +5,6 @@ import ShoppingCartIcon from '../assets/shopping-cart.svg';
 function Header(props) {
 
 	console.log('header render');
-	console.log('props.cart: ', props.cart);
-
-	const [cartQuantity, setQuantity] = React.useState(props.cart)
-
-	React.useEffect(() => {
-		let quantity = 0;
-
-		props.cart.forEach((ele) => {
-			console.log(ele);
-			quantity += ele.quantity	
-		})
-		setQuantity(quantity)
-	}, [props.cart]);
-
 
 	return (
 		<header>
@@ -62,7 +48,7 @@ function Header(props) {
 						className="header--cart-img" 
 						src={ShoppingCartIcon} 
 						alt='cart-icon'/>
-					<span className="cart-amount">{cartQuantity}</span>
+					<span className="cart-amount">{props.cartQuantity}</span>
 				</button>
 			</Link>
 		</header>

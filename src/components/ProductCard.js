@@ -18,7 +18,6 @@ export default function ProductCard(props) {
 
 	// makes quantity a valid 0-999 integer
 	React.useEffect(() => {
-		console.log('from useEffect')
 		if (quantity > 999) return setQuantity(999)
 		if (quantity < 0 || quantity === '' || isNaN(quantity)) return setQuantity(0)
 	}, [quantity])
