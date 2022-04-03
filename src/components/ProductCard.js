@@ -28,7 +28,6 @@ export default function ProductCard(props) {
 			<h3>{props.name}</h3>
 			<img className="card--image" src={props.imgsrc} alt=''></img>
 			<p>€{props.price}</p>
-			{/* <p>{props.description}</p> */}
 			<div>
 				<button className="card--quantity-btn" onClick={subtractQuantity}>-</button>
 				<input pattern="[0-9]*" value={quantity} onChange={handleChange}></input>

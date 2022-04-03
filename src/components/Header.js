@@ -1,7 +1,25 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import ShoppingCartIcon from '../assets/shopping-cart.svg';
 
-function Header() {
+function Header(props) {
+
+	console.log('header render');
+	console.log('props.cart: ', props.cart);
+
+	const [cartQuantity, setQuantity] = React.useState(props.cart)
+
+	React.useEffect(() => {
+		let quantity = 0;
+
+		props.cart.forEach((ele) => {
+			console.log(ele);
+			quantity += ele.quantity	
+		})
+		setQuantity(quantity)
+	}, [props.cart]);
+
+
 	return (
 		<header>
 			<Link to='/' style={{ textDecoration: 'none' }}>
@@ -44,7 +62,7 @@ function Header() {
 						className="header--cart-img" 
 						src={ShoppingCartIcon} 
 						alt='cart-icon'/>
-					<span className="cart-amount">{54}</span>
+					<span className="cart-amount">{cartQuantity}</span>
 				</button>
 			</Link>
 		</header>

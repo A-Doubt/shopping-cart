@@ -7,22 +7,35 @@ function Shop() {
 
 	const [itemsData, setItemsData] = React.useState([]);
 	const [cartItems, setCartItems] = React.useState([]);
-	
+
 	function addToCart(e, id, quantity) {
 		console.log('added to cart');
-		console.log(e);
-		console.log(id);
-		console.log(quantity)
 		if (!quantity) return
-		
+
 		setCartItems((prevCart) => {
-			return [...prevCart, {
-				id: id,
-				quantity: quantity,
-			}]
+			if (!prevCart.length) return ([{id: id, quantity: quantity}])
+
+			let newCart = [];
+			let updatedItem;
+			let isNewItem = false;
+
+			prevCart.forEach((ele, index) => {
+				newCart.push(ele);
+				if (ele.id === id) {
+					isNewItem = true;
+					updatedItem = newCart.splice(index)
+					updatedItem = {id: id, quantity: ele.quantity + quantity}
+					newCart.push(updatedItem);
+				}
+			})
+			if (!isNewItem) return ([...prevCart, {id: id, quantity: quantity}])
+			else return newCart;
 		})
-		console.log('cart: ', cartItems);
 	}
+
+	React.useEffect(() => {
+		console.table('cart: ', cartItems)
+	}, [cartItems])
 
 	React.useEffect(() => {
 		fetch('https://fakestoreapi.com/products?limit=15')
@@ -46,7 +59,7 @@ function Shop() {
 
 	return (
 		<div>
-			<Header />
+			<Header cart={cartItems} />
 			<section  className="shop">
 				<h1>SHOP</h1>
 				<div className='shop--cards'>
