@@ -10,7 +10,9 @@ function Shop(props) {
 				name={ele.title} 
 				imgsrc={ele.image}
 				price={ele.price.toFixed(2)}
-				handleClick={(e, id, quantity) => props.handleClick(e, id, quantity)}
+				handleClick={(e, id, quantity, price) => props.handleClick(
+					e, id, quantity, price)
+				}
 				key={nanoid()}
 				id={ele.id}
 			/>

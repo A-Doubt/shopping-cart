@@ -34,7 +34,7 @@ export default function ProductCard(props) {
 			</div>
 			<button 
 				type="button" 
-				onClick={(e) => props.handleClick(e, props.id, quantity)}
+				onClick={(e) => props.handleClick(e, props.id, quantity, props.price)}
 			>
 				Add to cart
 			</button>

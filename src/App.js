@@ -43,13 +43,13 @@ function App() {
 		setQuantity(quantity);
 	}, [cartItems]);
 
-	function addToCart(e, id, quantity) {
+	function addToCart(e, id, quantity, price) {
 		console.log('added to cart');
 
 		if (!quantity) return;
 
 		setCartItems((prevCart) => {
-			if (!prevCart.length) return [{ id: id, quantity: quantity }];
+			if (!prevCart.length) return [{ id: id, quantity: quantity, price: price }];
 
 			let newCart = [];
 			let updatedItem;
@@ -60,12 +60,12 @@ function App() {
 				if (ele.id === id) {
 					isNewItem = true;
 					updatedItem = newCart.splice(index);
-					updatedItem = { id: id, quantity: ele.quantity + quantity };
+					updatedItem = { id: id, quantity: ele.quantity + quantity, price: price };
 					newCart.push(updatedItem);
 				}
 			});
 			if (!isNewItem)
-				return [...prevCart, { id: id, quantity: quantity }];
+				return [...prevCart, { id: id, quantity: quantity, price: price}];
 			else return newCart;
 		});
 	}
