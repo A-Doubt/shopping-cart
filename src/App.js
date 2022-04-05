@@ -12,6 +12,7 @@ function App() {
 	const [cartItems, setCartItems] = React.useState([]);
 	const [cartQuantity, setQuantity] = React.useState(cartItems);
 	const [itemsData, setItemsData] = React.useState([]);
+	const [cartFull, setCartFull] = React.useState(false);
 
 	React.useEffect(() => {
 		const urls = [
@@ -33,6 +34,7 @@ function App() {
 	}, [])
 
 	console.log('itemsData: ', itemsData);
+	console.log('IS CART FULL?', cartFull)
 
 	React.useEffect(() => {
 		let quantity = 0;
@@ -47,6 +49,10 @@ function App() {
 		console.log('added to cart');
 
 		if (!quantity) return;
+		if (cartQuantity + quantity > 999) {
+			setCartFull(true);
+			return
+		}
 
 		setCartItems((prevCart) => {
 			if (!prevCart.length) return [{ id: id, quantity: quantity, price: price }];
@@ -131,6 +137,9 @@ function App() {
 		})
 	}
 
+	function handleCartFull() {
+		setCartFull(false);
+	}
 
 	return (
 		<BrowserRouter>
@@ -145,6 +154,8 @@ function App() {
 							cartItems={cartItems}
 							cartQuantity={cartQuantity}
 							itemsData={itemsData}
+							cartFull={cartFull}
+							handleCartFull={handleCartFull}
 						/>
 					}
 				/>
