@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Marck+Script&display=swap');
+
+
 *, *::before, *::after {
 	box-sizing: border-box;
 	margin: 0;
@@ -29,10 +32,11 @@ body {
 	flex-direction: column;
 }
 
-.no-style-btn {
-	background-color: transparent;
-	border: none;
-	cursor: pointer;
+.bold {
+	font-weight: 700;
+}
+.small {
+	font-size: 0.7em;
 }
 
 
@@ -47,7 +51,8 @@ header {
 		}
 	}
 	
-	background-color: rgb(83, 83, 83);
+	border-bottom: solid 1px rgb(180, 180, 180);
+	background-color: black;
 	color: white;
 	display: flex;
 	gap: 20px;
@@ -62,13 +67,6 @@ header {
 		margin-right: 18px;
 	}
 	
-	.header--home-btn {
-		display: flex;
-		align-items: center;
-		font-size: 1.4rem;
-		font-weight: 600;
-		color: white;
-	}
 	
 	ul {
 		list-style-type: none;
@@ -77,35 +75,64 @@ header {
 		}
 		
 		display: flex;
-		.header--nav-btn {
-			font-size: 1.4rem;
-			font-weight: 600;
-			color: white;
-		}
 	}
 	
-	.header--cart-btn {
-		position: relative;
-	}
 	.header--cart-img {
-		height: 70px;
-		width: 70px;
+		height: 60px;
+		width: 60px;
 	}
 	
 	.cart-amount {
 		position: absolute;
 		bottom: 5px;
 		right: 3px;
-		color: white;
-		font-size: 1.2rem;
-		background-color: rgba(93, 165, 65, 0.726);
+		color: rgb(255, 255, 255);
+		font-size: 1.4rem;
+		background-color: rgba(93, 165, 65);
 		border-radius: 8px;
-		padding: 5px;
+		padding: 3px 10px;
 	}
 	
 }
 
-// Main Shop page
+// HOME PAGE
+
+.home {
+	font-family: 'Marck Script';
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	height: 100%;
+	background-color: black;
+	color: white;
+}
+
+.home--text:not(button) {
+	position: absolute;
+	font-size: 34px;
+	top: 30%;
+	left: 10%;
+	z-index: 1;
+}
+.center {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	pointer-events: none;
+}
+.hero-photo {
+	opacity: 0.5;
+	object-fit: cover;
+	justify-self: center;
+	align-self: center;
+	width: 100vw;
+	height: 60vh;
+	filter: blur(4px)
+}
+
+
+// MAIN SHOP PAGE
 .shop {
 	padding: min(40px, 5vw);
 }
@@ -122,14 +149,14 @@ header {
 		border-bottom-color: rgb(201, 201, 201);
 		border-bottom-style: solid;
 		border-bottom-width: 1px;
-
+		
 		bottom: -10px;
 		left: 14px;
 		content: "";
 		position: absolute;
 		width: 241px;
 		z-index: 1;
-
+		
 	}
 	&::after {
 		border-right-color: rgb(201, 201, 201);
@@ -142,7 +169,7 @@ header {
 		height: 291px;
 		z-index: 1;
 	}
-
+	
 	text-align: center;
 	position: relative;
 	align-items: center;
@@ -157,57 +184,121 @@ header {
 	
 	h3 {
 		font-size: 1rem;
+		height: 60px;
 	}
 	.card--image {
 		height: 100px;
 		width: auto;
 	}
+	
+	.card--price {
+		color: green;
+		font-size: 1rem;
+		font-weight: 700;
+	}
+	
+	input {
+		border: 0;
+		text-align: center;
+		font-size: 1.4rem;
+		width: 20%;
+		height: 30px;
+	}
+	
+	.card--quantity {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 6px;
+	}
 }
 
-// Cart page
-.cart {
-	padding: 10px;
+
+// CART PAGE
+.cart--empty {
+	.cart-photo {
+		opacity: 0.9;
+		object-fit: cover;
+		justify-self: center;
+		align-self: center;
+		width: 100vw;
+		height: 60vh;
+		filter: blur(4px);
+	}
 }
+
+.cart {
+	padding: 20px 10px 10px 10px;
+	text-align: center;
+	.delivery {
+		color: green;
+		margin-top: 12px;
+	}
+}
+
 .cart--items {
 	display: flex;
 	align-items: stretch;
 	flex-direction: row-reverse;
 	justify-content: flex-end;
-
+	
 	table {
 		max-width: 500px; 
 		width: 100%;
 		height: auto;
-
+		
 		caption {
-			font-size: 1.4rem;
+			font-size: 1.2rem;
 			font-weight: 700;
 			margin: 30px 0 15px 0;
 		}
+		
+		th {
+			height: 40px;
+			font-weight: 700;
+		}
+		
 		th, td {
 			width: 100px;
-			font-weight: 700;
+			font-size: 1rem;
 			text-align: center;
 		}
-
+		
 		tfoot {
 			padding-top: 20px;
 		}
+		.cart--item-quantity {
+			display: flex;
+			justify-content: center;
+			gap: 10px;
+			font-size: 20px;
+		}
 	}
-
-
+	
+	
 	.cart--total {
+		background-color: lightgrey;
+		margin-top: 50px;
 		min-width: 400px;
+		max-height: 450px;
+		
 	}
+	
 	.cart--item-card {
 		width: max(60vw, 500px);
 		max-width: 1000px;
-		display: flex;
+		display: grid;
+		grid-template-columns: 200px 1fr;
 		padding: 20px;
-		border-bottom: 1px solid grey;
-		border-right: 1px solid grey;
+		// border-bottom: 1px solid grey;
+		// border-right: 1px solid grey;
+		
+		&:first-of-type {
+			border: none;
+		}
+		
 		img {
-			height: 300px;
+			height: 200px;
 			width: auto;
 		}
 	}
@@ -216,6 +307,109 @@ header {
 	}
 }
 
+// BUTTONS
+button {
+	cursor: pointer;
+	background-color: transparent;
+}
+
+.no-style-btn {
+	background-color: transparent;
+	border: none;
+}
+
+.header--home-btn {
+	display: flex;
+	align-items: center;
+	font-size: 1.4rem;
+	font-weight: 600;
+	color: white;
+}
+.header--nav-btn {
+	font-size: 1.4rem;
+	font-weight: 600;
+	color: white;
+	padding: 5px;
+	border-radius: 5px;
+}
+
+
+.header--cart-btn {
+	position: relative;
+}
+.home--btn {
+	background-color: white;
+	margin-top: 30px;
+	width: 200px;
+	height: 80px;
+	font-size: 24px;
+	font-weight: 600;
+	letter-spacing: 2.6px;
+	position: relative;
+	color: #000;
+	z-index: 2;
+	line-height: 40px;
+	padding: 0;
+	border: 0;
+	cursor: pointer;
+	transition: transform 0.3s;
+	
+	&:hover, &:focus {
+		transform: scale(1.1);
+	}
+	
+	&:after {
+		position: absolute;
+		content: "";
+		border: 5px solid white;
+		z-index: -1;
+		height: 100%;
+		width: 100%;
+		bottom: -10px;
+		right: -10px;
+	}
+}
+
+.quantity-btn {
+	width: 30px;
+	height: 30px;
+	color: green;
+	background-color: transparent;
+	border: 1px solid grey;
+	font-size: 24px;
+	font-weight: 700;
+}
+
+.card--add-btn {
+	margin-top: 10px;
+	border-radius: 6px;
+	width: 100px;
+	height: 30px;
+	background-color: green;
+	font-size: 1rem;
+	border: 0;
+	color: white;
+}
+
+.remove-btn {
+	border: 0;
+	text-align: center;
+	color: red;
+	font-size: 22px;
+}
+
+.confirm-btn {
+	margin-top: 30px;
+	margin-bottom: 30px;
+	border-radius: 6px;
+	width: 200px;
+	height: 60px;
+	background-color: green;
+	font-size: 24px;
+	font-weight: 700;
+	border: 0;
+	color: white;
+}
 
 
 
@@ -231,8 +425,8 @@ footer {
 	height: 35px;
 	left: 0;
 	bottom: 0;
-	background-color: rgb(0, 0, 0, 0.7);
-
+	background-color: rgb(0, 0, 0, 1);
+	
 	@media only screen and (max-width: 600px) {
 		background-color: rgba(0, 0, 0, 0.7);
 		position: relative;
@@ -246,30 +440,31 @@ footer {
 			min-width: 200px;
 		}
 	}
-
+	
 	.github {
 		display: flex;
 		align-items: center;
-
+		
 		@media only screen and (min-width: 601px) {
 			gap: 0.8rem;
 		}
-
+		
 		a {
 			text-decoration: none;
 			color: lightgrey;
 		}
 	}
-
+	
 	img {
 		height: 26px;
 	}
-	.links {
+	.links, p:last-of-type {
 		display: flex;
 		gap: 0.5rem;
 		flex-direction: column;
 		justify-content: center;
 		font-size: 1rem;
 		min-width: 150px;
+		width: 20vw;
 	}
 }

@@ -74,6 +74,64 @@ function App() {
 		console.table('cart: ', cartItems);
 	}, [cartItems]);
 
+	function addItem(data) {
+		console.log(data)
+		setCartItems((prevCart) => {
+			let newCart = [];
+			let updatedItem;
+
+			prevCart.forEach((ele, index) => {
+				newCart.push(ele)
+				if (ele.id === data.id) {
+					updatedItem = newCart.splice(index);
+					updatedItem = { 
+						id: data.id, 
+						quantity: data.quantity + 1, 
+						price: data.itemsData.price.toString() };
+					newCart.push(updatedItem)
+				}
+			})
+
+			console.log('prevCart: ', prevCart);
+			console.log('newCart: ', newCart);
+			return newCart;
+		})
+	}
+
+	function subtractItem(data) {
+		console.log(data)
+		setCartItems((prevCart) => {
+			let newCart = [];
+			let updatedItem;
+
+			prevCart.forEach((ele, index) => {
+				newCart.push(ele)
+				if (ele.id === data.id) {
+					updatedItem = newCart.splice(index);
+					updatedItem = { 
+						id: data.id, 
+						quantity: data.quantity - 1, 
+						price: data.itemsData.price.toString() };
+					if (updatedItem.quantity > 0) newCart.push(updatedItem)
+				}
+			})
+
+			console.log('prevCart: ', prevCart);
+			console.log('newCart: ', newCart);
+			return newCart;
+		})
+	}
+
+	function removeItem(data) {
+		console.log(data);
+		setCartItems((prevCart) => {
+			return prevCart.filter((ele) => {
+				return ele.id !== data.id;
+			})
+		})
+	}
+
+
 	return (
 		<BrowserRouter>
 			<Header cartQuantity={cartQuantity} />
@@ -99,6 +157,9 @@ function App() {
 							cartItems={cartItems}
 							cartQuantity={cartQuantity}
 							itemsData={itemsData}
+							handleClickAdd={addItem}
+							handleClickSubtract={subtractItem}
+							handleClickRemove={removeItem}
 						/>
 					}
 				/>

@@ -2,7 +2,7 @@ import React from "react"
 
 export default function ProductCard(props) {
 
-	const [quantity, setQuantity] = React.useState(0)
+	const [quantity, setQuantity] = React.useState(1)
 
 	function handleChange(e) {
 		setQuantity(parseInt(e.target.value, 10));
@@ -18,21 +18,22 @@ export default function ProductCard(props) {
 
 	// makes quantity a valid 0-999 integer
 	React.useEffect(() => {
-		if (quantity > 999) return setQuantity(999)
-		if (quantity < 0 || quantity === '' || isNaN(quantity)) return setQuantity(0)
+		if (quantity > 99) return setQuantity(99)
+		if (quantity < 1 || quantity === '' || isNaN(quantity)) return setQuantity(1)
 	}, [quantity])
 
 	return (
 		<div className="card flex-column">
 			<h3>{props.name}</h3>
 			<img className="card--image" src={props.imgsrc} alt=''></img>
-			<p>€{props.price}</p>
-			<div>
-				<button className="card--quantity-btn" onClick={subtractQuantity}>-</button>
+			<p className="card--price">€{props.price}</p>
+			<div className="card--quantity">
+				<button className="quantity-btn" onClick={subtractQuantity}>-</button>
 				<input pattern="[0-9]*" value={quantity} onChange={handleChange}></input>
-				<button className="card--quantity-btn" onClick={addQuantity}>+</button>
+				<button className="quantity-btn" onClick={addQuantity}>+</button>
 			</div>
 			<button 
+				className="card--add-btn"
 				type="button" 
 				onClick={(e) => props.handleClick(e, props.id, quantity, props.price)}
 			>

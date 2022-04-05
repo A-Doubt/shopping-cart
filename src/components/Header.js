@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import ShoppingCartIcon from '../assets/shopping-cart.svg';
+import ShoppingCartIcon from '../assets/cart-white.png';
 
 function Header(props) {
 

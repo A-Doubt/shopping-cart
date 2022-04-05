@@ -3,10 +3,18 @@ import { Link } from 'react-router-dom';
 function Home() {
 	return (
 		<div className="home">
-			<h1>Home Page</h1>
-			<Link to="/shop">
-				<button type="button">Click Me!</button>
+			<div className="home--text">
+				<h1 className="">Finest collection of clothes</h1>
+				<h3>From all over the world</h3>
+				<Link to="/shop">
+				<button className ="home--btn" type="button">Shop now</button>
 			</Link>
+			</div>
+			<img 
+				className="hero-photo center" 
+				src={require("../assets/home-photo001ed2.jpg")} 
+				alt=""
+			/>
 		</div>
 	);
 }
