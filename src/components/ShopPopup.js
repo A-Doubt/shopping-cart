@@ -2,16 +2,17 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 export default function Popup(props) {
-	
+	// add a listener when Popup mounts and remove it when it dismounts
 	React.useEffect(() => {
 		function closePopup(e) {
-			if (e.target.className === 'popup--container') props.handleClickPopup();
+			if (e.target.className === 'popup--container')
+				props.handleClickPopup();
 		}
 		window.addEventListener('click', closePopup);
 		return () => {
 			window.removeEventListener('click', closePopup);
 		};
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return (

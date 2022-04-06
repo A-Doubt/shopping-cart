@@ -18,17 +18,16 @@ function Cart(props) {
 			.split('T')[0],
 	};
 
-	console.log('props: ', props);
-
 	// create components from all items currently in cart
 	const cartItemsElements = props.cartItems.map((item) => {
+
 		// this makes sure only the needed item's data is passed
 		let thisItemData;
 		props.itemsData.forEach((ele) => {
 			if (ele.id === item.id) thisItemData = ele;
 		});
 
-		// returns cart item will all needed data
+		// returns cart item will all the needed data
 		return (
 			<CartItem
 				itemsData={thisItemData}
@@ -43,12 +42,9 @@ function Cart(props) {
 	});
 
 	function calcTotal() {
-		console.log('calc total');
-		console.log(props.cartItems);
 		let sum = 0;
 
 		props.cartItems.forEach((ele) => {
-			console.log(parseFloat(ele.price));
 			sum += ele.quantity * parseFloat(ele.price);
 		});
 		return parseFloat(sum.toFixed(2));
@@ -62,8 +58,6 @@ function Cart(props) {
 	const total = calcTotal();
 	const tax = calcTax(total);
 	const shipping = parseFloat((15).toFixed(2));
-
-	console.log('total: ', total, 'tax: ', tax, 'shipping: ', shipping);
 
 	return (
 		<div>
@@ -130,15 +124,17 @@ function Cart(props) {
 				</div>
 			) : (
 				<div className="cart--empty">
-					<img 
+					<img
 						className="cart-photo center"
-						src={require("../assets/shopping-carted2.jpg")}
+						src={require('../assets/shopping-carted2.jpg')}
 						alt="empty cart"
 					/>
 					<div className="home--text">
 						<h1>Your cart is empty</h1>
 						<Link to="/shop">
-							<button className="confirm-btn">Back to shop</button>
+							<button className="confirm-btn">
+								Back to shop
+							</button>
 						</Link>
 					</div>
 				</div>

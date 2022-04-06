@@ -1,6 +1,4 @@
 export default function CartItem(props) {
-	
-	console.log('CartItem props: ', props)
 	return (
 		<div className="cart--item-card">
 			<img src={props.itemsData.image} alt="product" />
@@ -45,10 +43,16 @@ export default function CartItem(props) {
 									props.quantity * props.itemsData.price
 								).toFixed(2)}
 							</td>
-							<td><button 
-								className="remove-btn"
-								onClick={() => props.handleClickRemove(props)}
-							>❌</button></td>
+							<td>
+								<button
+									className="remove-btn"
+									onClick={() =>
+										props.handleClickRemove(props)
+									}
+								>
+									❌
+								</button>
+							</td>
 						</tr>
 					</tbody>
 				</table>
@@ -56,12 +60,3 @@ export default function CartItem(props) {
 		</div>
 	);
 }
-
-// eslint-disable-next-line no-lone-blocks
-{/* 
-<div>
-	<button className="card--quantity-btn" onClick={subtractQuantity}>-</button>
-	<input pattern="[0-9]*" value={quantity} onChange={handleChange}></input>
-	<button className="card--quantity-btn" onClick={addQuantity}>+</button>
-</div> 
-*/}

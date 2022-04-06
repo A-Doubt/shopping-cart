@@ -1,16 +1,30 @@
 @import url('https://fonts.googleapis.com/css2?family=Marck+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+// TABLE OF CONTENT
+// 1. global styling
+// 2. Header
+// 3. Homepage
+// 4. Shop page
+// 		4.1 Shop Popups
+// 5. About page
+// 6. Cart page
+// 7. Footer
+// 8. Buttons
 
 
-*, *::before, *::after {
+// 1. GLOBAL STYLING
+*,
+*::before,
+*::after {
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
 }
 
 body {
-	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-	'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-	sans-serif;
+	font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+		sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
@@ -22,7 +36,6 @@ body {
 	height: fit-content;
 }
 
-// GLOBAL CLASSES
 .flex-row {
 	display: flex;
 }
@@ -35,6 +48,7 @@ body {
 .bold {
 	font-weight: 700;
 }
+
 .small {
 	font-size: 0.7em;
 }
@@ -43,30 +57,46 @@ body {
 	opacity: 0;
 	visibility: hidden;
 }
+
 .blur {
 	filter: blur(4px);
 }
 
-// Header
+
+// 2. HEADER
 header {
+
 	@media only screen and (max-width: 460px) {
-		gap: 2px;
-		h1, button, img {
+		gap: 0px;
+
+		h1,
+		button,
+		img {
 			transform: scale(0.6);
 		}
 	}
+
 	@media only screen and (max-width: 968px) {
 		height: 20vh;
-		h1, button, img {
+
+		h1,
+		button,
+		img {
 			transform: scale(0.8);
 		}
-		
+
 		ul {
 			flex-direction: column;
 			gap: 5px;
 		}
 	}
-	
+
+	h1 {
+		letter-spacing: 2px;
+		font-family: 'Marck Script';
+		font-size: 46px;
+	}
+
 	border-bottom: solid 1px rgb(180, 180, 180);
 	background-color: black;
 	color: white;
@@ -76,28 +106,28 @@ header {
 	align-items: center;
 	justify-content: space-around;
 	height: 8vh;
-	
+
 	.header--logo {
 		height: 50px;
 		width: 50px;
 		margin-right: 18px;
 	}
-	
-	
+
 	ul {
 		list-style-type: none;
+
 		@media only screen and (min-width: 969px) {
 			gap: 40px;
 		}
-		
+
 		display: flex;
 	}
-	
+
 	.header--cart-img {
 		height: 60px;
 		width: 60px;
 	}
-	
+
 	.cart-amount {
 		position: absolute;
 		bottom: 5px;
@@ -108,12 +138,11 @@ header {
 		border-radius: 8px;
 		padding: 3px 10px;
 	}
-	
 }
 
-// HOME PAGE
-
+// 3. HOME PAGE
 .home {
+	position: relative;
 	font-family: 'Marck Script';
 	display: flex;
 	flex-direction: column;
@@ -121,9 +150,11 @@ header {
 
 	background-color: black;
 	color: white;
+
 	@media only screen and (max-width: 600px) {
 		height: 150vh;
 	}
+
 	@media only screen and (min-width: 601px) {
 		height: 150vh;
 		height: 100%;
@@ -132,17 +163,19 @@ header {
 
 .home--text:not(button) {
 	position: absolute;
-	font-size: min(2vw, 1.4rem);
+	font-size: min(4vw, 2.4rem);
 	top: 30%;
 	left: 10%;
 	z-index: 1;
 }
+
 .center {
 	position: absolute;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 }
+
 .hero-photo {
 	opacity: 0.5;
 	object-fit: cover;
@@ -154,108 +187,125 @@ header {
 	filter: blur(4px)
 }
 
+.attributions {
+	position: absolute;
+	bottom: 6px;
+	font-family: 'Roboto', serif;
+	font-size: 10px;
+	color: grey;
+	a {
+		color: lightgrey;
+	}
+}
 
-// MAIN SHOP PAGE
+// 4. SHOP PAGE
 .shop {
 	padding: min(40px, 5vw);
+
+	&>h1 {
+		text-align: center;
+		margin-bottom: 30px;
+		font-size: 60px;
+		font-family: 'Marck Script', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+	}
 }
+
+.shop--no-data {
+	margin-top: 80px;
+	display: grid;
+	place-items: center;
+}
+
 .shop--main {
 	display: flex;
-	@media only screen and (max-width: 500px) {
+
+	@media only screen and (max-width: 768px) {
 		flex-direction: column;
 		align-items: center;
 		margin-bottom: 60px;
 	}
 }
+
 .shop--cards {
 	flex: 1;
 	display: grid;
 	justify-content: center;
 	grid-template-columns: repeat(auto-fill, 250px);
 	grid-template-rows: auto;
+	gap: 5px;
+
+	@media only screen and (max-width: 768px) {
+		grid-template-columns: 1fr 1fr;
+		flex-direction: column;
+		align-items: center;
+		margin-bottom: 60px;
+	}
+
+	@media only screen and (max-width: 500px) {
+		grid-template-columns: 1fr;
+		flex-direction: column;
+		align-items: center;
+		margin-bottom: 60px;
+	}
 }
+
 .filters {
-	height: 200px;
+	height: 170px;
 	border: 1px solid grey;
 	padding: 10px;
 	display: flex;
 	flex-direction: column;
 	margin: 20px 10px 10px 20px;
 	width: fit-content;
+
 	h3 {
 		font-size: 1.5rem;
 	}
+
 	.filter {
 		display: flex;
 		justify-content: flex-start;
 		align-items: center;
 	}
+
 	label {
 		font-size: 1rem;
 		margin: 10px;
 	}
+
 	input {
 		width: 24px;
 		height: 24px;
 	}
 }
+
 .card {
-	// before and after - horizontal and vertical lines between items
-	&::before {
-		border-bottom-color: rgb(201, 201, 201);
-		border-bottom-style: solid;
-		border-bottom-width: 1px;
-		
-		bottom: -10px;
-		left: 14px;
-		content: "";
-		position: absolute;
-		width: 241px;
-		z-index: 1;
-		
-	}
-	&::after {
-		border-right-color: rgb(201, 201, 201);
-		border-right-style: solid;
-		border-right-width: 1px;
-		top: 14px;
-		right: -10px;
-		content: "";
-		position: absolute;
-		height: 291px;
-		z-index: 1;
-		@media only screen and (max-width: 600px) {
-			visibility: hidden;
-		}
-	}
-	
 	text-align: center;
 	position: relative;
 	align-items: center;
 	justify-content: space-around;
-	// border: solid black 2px;
 	border-radius: 10px;
-	
+
 	height: 300px;
-	width: 250px;
-	background-color: rgb(255, 255, 255);
+	background-color: white;
 	padding: 10px 25px;
-	
+
 	h3 {
 		font-size: 1rem;
 		height: 60px;
 	}
+
 	.card--image {
 		height: 100px;
 		width: auto;
 	}
-	
+
 	.card--price {
 		color: green;
 		font-size: 1rem;
 		font-weight: 700;
 	}
-	
+
 	input {
 		border: 0;
 		text-align: center;
@@ -263,7 +313,7 @@ header {
 		width: 20%;
 		height: 30px;
 	}
-	
+
 	.card--quantity {
 		display: flex;
 		align-items: center;
@@ -271,15 +321,19 @@ header {
 		gap: 6px;
 	}
 }
+
+
+// 4.1 SHOP POPUPS
 .popup--container {
 	z-index: 3;
-	position: absolute;
+	position: fixed;
 	top: 0;
 	left: 0;
 	height: 100vh;
 	width: 100vw;
 	background-color: rgba(0, 0, 0, 0.5);
 }
+
 .popup--box {
 	text-align: center;
 	background: white;
@@ -294,10 +348,12 @@ header {
 	span {
 		margin-right: 14px;
 	}
+
 	.popup--buttons {
 		display: flex;
 		justify-content: space-around;
 		align-items: center;
+
 		button {
 			height: 40px;
 			width: 160px;
@@ -305,7 +361,58 @@ header {
 	}
 }
 
-// CART PAGE
+
+// 5. ABOUT PAGE
+.about {
+	&>div {
+		padding: 40px 20px 20px 20px;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		place-items: center;
+
+		@media only screen and (max-width: 1000px) {
+			grid-template-columns: 1fr;
+
+			.about--contact {
+				margin-top: 60px;
+			}
+
+			iframe {
+				margin-bottom: 20px;
+			}
+		}
+	}
+
+	h1 {
+		font-family: 'Marck Script';
+		font-size: 56px;
+	}
+
+	p {
+		line-height: 1.5rem;
+		max-width: 500px;
+	}
+
+	span {
+		color: red;
+	}
+
+	.mapouter {
+		display: flex;
+		flex: 1;
+		margin-top: 40px;
+		padding: 0;
+
+		iframe {
+			width: 100vw;
+			max-width: 100%;
+		}
+	}
+
+}
+
+
+// 6. CART PAGE
 .cart--empty {
 	.cart-photo {
 		z-index: -2;
@@ -320,8 +427,17 @@ header {
 }
 
 .cart {
-	padding: 20px 10px 10px 10px;
+	@media only screen and (min-width: 901px) {
+		padding: 20px 10px 10px 10px;
+	}
+
+	@media only screen and (max-width: 900px) {
+		padding: 0px;
+	}
+
+	margin-top: 16px;
 	text-align: center;
+
 	.delivery {
 		color: green;
 		margin-top: 12px;
@@ -330,35 +446,50 @@ header {
 
 .cart--items {
 	display: flex;
-	align-items: stretch;
 	flex-direction: row-reverse;
 	justify-content: flex-end;
-	
+	place-content: center;
+
+	@media only screen and (max-width: 900px) {
+		flex-direction: column;
+	}
+
 	table {
-		max-width: 500px; 
+		@media only screen and (min-width: 901px) {
+			max-width: 600px;
+		}
+
+		@media only screen and (max-width: 900px) {
+			max-width: 360px;
+		}
+
 		width: 100%;
 		height: auto;
-		
+		margin-left: auto;
+		margin-right: auto;
+
 		caption {
 			font-size: 1.2rem;
 			font-weight: 700;
 			margin: 30px 0 15px 0;
 		}
-		
+
 		th {
 			height: 40px;
 			font-weight: 700;
 		}
-		
-		th, td {
+
+		th,
+		td {
 			width: 100px;
 			font-size: 1rem;
 			text-align: center;
 		}
-		
+
 		tfoot {
 			padding-top: 20px;
 		}
+
 		.cart--item-quantity {
 			display: flex;
 			justify-content: center;
@@ -366,40 +497,117 @@ header {
 			font-size: 20px;
 		}
 	}
-	
-	
+
 	.cart--total {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		flex: 1;
 		background-color: lightgrey;
 		margin-top: 50px;
-		min-width: 400px;
 		max-height: 450px;
-		
 	}
-	
+
 	.cart--item-card {
-		width: max(60vw, 500px);
-		max-width: 1000px;
+		margin-left: auto;
+		margin-right: auto;
+		width: max(60vw, 700px);
 		display: grid;
 		grid-template-columns: 200px 1fr;
 		padding: 20px;
-		// border-bottom: 1px solid grey;
-		// border-right: 1px solid grey;
-		
+
+		@media only screen and (min-width: 601px) {
+			max-width: 1000px;
+		}
+
+		@media only screen and (max-width: 900px) {
+			width: 100vw;
+			grid-template-columns: 1fr;
+			padding: 4px;
+			justify-items: center;
+			padding: 15px 0;
+			border-bottom: 2px solid grey;
+		}
+
 		&:first-of-type {
 			border: none;
 		}
-		
+
 		img {
 			height: 200px;
 			width: auto;
 		}
 	}
+
 	.cart--item-data {
 		width: 100%;
 	}
 }
 
-// BUTTONS
+
+// 7. FOOTER 
+footer {
+	margin-top: auto;
+	color: white;
+	display: grid;
+	grid-template-columns: 1fr auto 1fr;
+	justify-content: space-between;
+	width: 100%;
+	max-width: 100vw;
+	left: 0;
+	bottom: 0;
+	background-color: rgb(0, 0, 0, 1);
+
+	@media only screen and (max-width: 600px) {
+		background-color: rgba(0, 0, 0, 1);
+		position: relative;
+		height: 15vh;
+		justify-content: space-evenly;
+
+		.github {
+			flex: 1;
+			flex-direction: column;
+			justify-content: center;
+			gap: 0;
+			min-width: 200px;
+		}
+	}
+
+	.github {
+		display: flex;
+		align-items: center;
+
+		@media only screen and (min-width: 601px) {
+			gap: 0.8rem;
+		}
+
+		a {
+			text-decoration: none;
+			color: lightgrey;
+		}
+	}
+
+	img {
+		height: 26px;
+	}
+
+	.links,
+	p:last-of-type {
+		display: flex;
+		gap: 0.5rem;
+		flex-direction: column;
+		justify-content: center;
+		font-size: min(3vw, 1rem);
+		width: 20vw;
+	}
+
+	@media only screen and (max-width: 900px) {
+		grid-template-columns: 1fr 1fr;
+	}
+}
+
+
+// 8. BUTTONS
 button {
 	cursor: pointer;
 	background-color: transparent;
@@ -417,6 +625,7 @@ button {
 	font-weight: 600;
 	color: white;
 }
+
 .header--nav-btn {
 	font-size: 1.4rem;
 	font-weight: 600;
@@ -429,6 +638,7 @@ button {
 .header--cart-btn {
 	position: relative;
 }
+
 .home--btn {
 	background-color: white;
 	margin-top: 30px;
@@ -445,11 +655,12 @@ button {
 	border: 0;
 	cursor: pointer;
 	transition: transform 0.3s;
-	
-	&:hover, &:focus {
+
+	&:hover,
+	&:focus {
 		transform: scale(1.1);
 	}
-	
+
 	&:after {
 		position: absolute;
 		content: "";
@@ -501,63 +712,4 @@ button {
 	font-weight: 700;
 	border: 0;
 	color: white;
-}
-
-
-
-// FOOTER 
-
-footer {
-	margin-top: auto;
-	color: white;
-	display: grid;
-	grid-template-columns: 1fr auto 1fr;
-	justify-content: space-between;
-	width: 100%;
-	max-width: 100vw;
-	height: 50px;
-	left: 0;
-	bottom: 0;
-	background-color: rgb(0, 0, 0, 1);
-	
-	@media only screen and (max-width: 600px) {
-		background-color: rgba(0, 0, 0, 1);
-		position: relative;
-		height: 13.5vh;
-		justify-content: space-evenly;
-		.github {
-			flex: 1;
-			flex-direction: column;
-			justify-content: center;
-			gap: 0;
-			min-width: 200px;
-		}
-	}
-	
-	.github {
-		display: flex;
-		align-items: center;
-		
-		@media only screen and (min-width: 601px) {
-			gap: 0.8rem;
-		}
-		
-		a {
-			text-decoration: none;
-			color: lightgrey;
-		}
-	}
-	
-	img {
-		height: 26px;
-	}
-	.links, p:last-of-type {
-		display: flex;
-		gap: 0.5rem;
-		flex-direction: column;
-		justify-content: center;
-		font-size: 0.8rem;
-		width: 20vw;
-
-	}
 }

@@ -6,7 +6,6 @@ import Header from './components/Header';
 import Cart from './components/Cart';
 import Footer from './components/Footer';
 import AboutUs from './components/AboutUs';
-import Contact from './components/Contact';
 
 function App() {
 	const [cartItems, setCartItems] = React.useState([]);
@@ -14,28 +13,27 @@ function App() {
 	const [itemsData, setItemsData] = React.useState([]);
 	const [cartFull, setCartFull] = React.useState(false);
 
+	// gather data from an API
 	React.useEffect(() => {
 		const urls = [
-			"https://fakestoreapi.com/products/category/men's clothing", 
-			"https://fakestoreapi.com/products/category/women's clothing"
-		]
+			"https://fakestoreapi.com/products/category/men's clothing",
+			"https://fakestoreapi.com/products/category/women's clothing",
+		];
 		const promises = urls.map((url) => {
-			return fetch(url).then(res => res.json())
-		})
+			return fetch(url).then((res) => res.json());
+		});
 
 		// 2 arrays returned, merge them together and set the state
-		Promise.all(promises).then(results => {
+		Promise.all(promises).then((results) => {
 			let mergedResults = [];
-			results[0].forEach(result => mergedResults.push(result));
-			results[1].forEach(result => mergedResults.push(result));
+			results[0].forEach((result) => mergedResults.push(result));
+			results[1].forEach((result) => mergedResults.push(result));
 
-			setItemsData(mergedResults)
-		})
-	}, [])
+			setItemsData(mergedResults);
+		});
+	}, []);
 
-	console.log('itemsData: ', itemsData);
-	console.log('IS CART FULL?', cartFull)
-
+	// calculate quantity of items in cart on each change of cartItems
 	React.useEffect(() => {
 		let quantity = 0;
 
@@ -46,95 +44,94 @@ function App() {
 	}, [cartItems]);
 
 	function addToCart(e, id, quantity, price) {
-		console.log('added to cart');
-
 		if (!quantity) return;
 		if (cartQuantity + quantity > 999) {
 			setCartFull(true);
-			return
+			return;
 		}
 
 		setCartItems((prevCart) => {
-			if (!prevCart.length) return [{ id: id, quantity: quantity, price: price }];
+			if (!prevCart.length)
+				return [{ id: id, quantity: quantity, price: price }];
 
+			// new cart not to mutate prevCart
 			let newCart = [];
 			let updatedItem;
-			let isNewItem = false;
+			let isOldItem = false;
 
 			prevCart.forEach((ele, index) => {
 				newCart.push(ele);
+
+				// if that item has already been in the cart change the quantity only
 				if (ele.id === id) {
-					isNewItem = true;
+					isOldItem = true;
 					updatedItem = newCart.splice(index);
-					updatedItem = { id: id, quantity: ele.quantity + quantity, price: price };
+					updatedItem = {
+						id: id,
+						quantity: ele.quantity + quantity,
+						price: price,
+					};
 					newCart.push(updatedItem);
 				}
 			});
-			if (!isNewItem)
-				return [...prevCart, { id: id, quantity: quantity, price: price}];
+			if (!isOldItem)
+				return [
+					...prevCart,
+					{ id: id, quantity: quantity, price: price },
+				];
 			else return newCart;
 		});
 	}
 
-	React.useEffect(() => {
-		console.table('cart: ', cartItems);
-	}, [cartItems]);
-
 	function addItem(data) {
-		console.log(data)
 		setCartItems((prevCart) => {
+			// new cart not to mutate prevCart
 			let newCart = [];
 			let updatedItem;
 
 			prevCart.forEach((ele, index) => {
-				newCart.push(ele)
+				newCart.push(ele);
 				if (ele.id === data.id) {
 					updatedItem = newCart.splice(index);
-					updatedItem = { 
-						id: data.id, 
-						quantity: data.quantity + 1, 
-						price: data.itemsData.price.toString() };
-					newCart.push(updatedItem)
+					updatedItem = {
+						id: data.id,
+						quantity: data.quantity + 1,
+						price: data.itemsData.price.toString(),
+					};
+					newCart.push(updatedItem);
 				}
-			})
-
-			console.log('prevCart: ', prevCart);
-			console.log('newCart: ', newCart);
+			});
 			return newCart;
-		})
+		});
 	}
 
 	function subtractItem(data) {
-		console.log(data)
 		setCartItems((prevCart) => {
 			let newCart = [];
 			let updatedItem;
 
 			prevCart.forEach((ele, index) => {
-				newCart.push(ele)
+				newCart.push(ele);
 				if (ele.id === data.id) {
 					updatedItem = newCart.splice(index);
-					updatedItem = { 
-						id: data.id, 
-						quantity: data.quantity - 1, 
-						price: data.itemsData.price.toString() };
-					if (updatedItem.quantity > 0) newCart.push(updatedItem)
+					updatedItem = {
+						id: data.id,
+						quantity: data.quantity - 1,
+						price: data.itemsData.price.toString(),
+					};
+					if (updatedItem.quantity > 0) newCart.push(updatedItem);
 				}
-			})
-
-			console.log('prevCart: ', prevCart);
-			console.log('newCart: ', newCart);
+			});
 			return newCart;
-		})
+		});
 	}
 
 	function removeItem(data) {
-		console.log(data);
 		setCartItems((prevCart) => {
 			return prevCart.filter((ele) => {
 				return ele.id !== data.id;
-			})
-		})
+			});
+		});
 	}
 
 	function handleCartFull() {
@@ -160,7 +157,6 @@ function App() {
 					}
 				/>
 				<Route path="/about" element={<AboutUs />} />
-				<Route path="/contact" element={<Contact />} />
 				<Route
 					path="/cart"
 					element={
