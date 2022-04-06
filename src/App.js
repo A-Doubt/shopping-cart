@@ -139,7 +139,7 @@ function App() {
 	}
 
 	return (
-		<BrowserRouter>
+		<BrowserRouter basename="/shopping-cart">
 			<Header cartQuantity={cartQuantity} />
 			<Routes>
 				<Route path="/" index element={<Home />} />
