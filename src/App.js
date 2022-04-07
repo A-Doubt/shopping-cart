@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import Home from './components/Home';
 import React from 'react';
 import Shop from './components/Shop';
@@ -139,7 +139,7 @@ function App() {
 	}
 
 	return (
-		<BrowserRouter basename="/shopping-cart">
+		<HashRouter>
 			<Header cartQuantity={cartQuantity} />
 			<Routes>
 				<Route path="/" index element={<Home />} />
@@ -172,7 +172,7 @@ function App() {
 				/>
 			</Routes>
 			<Footer />
-		</BrowserRouter>
+		</HashRouter>
 	);
 }
 
