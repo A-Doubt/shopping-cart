@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import Home from './components/Home';
 import React from 'react';
 import Shop from './components/Shop';
@@ -32,6 +32,18 @@ function App() {
 			setItemsData(mergedResults);
 		});
 	}, []);
+
+	// get cart from localStorage
+	React.useEffect(() => {
+		if (localStorage.getItem('cart')) {
+			setCartItems(JSON.parse(localStorage.getItem('cart')));
+		}
+	}, []);
+
+	// update local storage every time cart is updated
+	React.useEffect(() => {
+		localStorage.setItem('cart', JSON.stringify(cartItems));
+	}, [cartItems]);
 
 	// calculate quantity of items in cart on each change of cartItems
 	React.useEffect(() => {
@@ -139,7 +151,7 @@ function App() {
 	}
 
 	return (
-		<BrowserRouter>
+		<HashRouter>
 			<Header cartQuantity={cartQuantity} />
 			<Routes>
 				<Route path="/" index element={<Home />} />
@@ -172,7 +184,7 @@ function App() {
 				/>
 			</Routes>
 			<Footer />
-		</BrowserRouter>
+		</HashRouter>
 	);
 }
 

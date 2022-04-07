@@ -19,27 +19,36 @@ function Cart(props) {
 	};
 
 	// create components from all items currently in cart
-	const cartItemsElements = props.cartItems.map((item) => {
+	function createCartItemElements() {
+		// if there are no items in cart just return
+		if (!props.cartItems) return;
+		const cartElements = props.cartItems.map((item) => {
+			// this makes sure only the needed item's data is passed
+			let thisItemData;
+			props.itemsData.forEach((ele) => {
+				if (ele.id === item.id) thisItemData = ele;
+			});
 
-		// this makes sure only the needed item's data is passed
-		let thisItemData;
-		props.itemsData.forEach((ele) => {
-			if (ele.id === item.id) thisItemData = ele;
+			// returns cart item will all the needed data
+			return (
+				<CartItem
+					itemsData={thisItemData}
+					quantity={item.quantity}
+					id={item.id}
+					handleClickAdd={(data) => props.handleClickAdd(data)}
+					handleClickSubtract={(data) =>
+						props.handleClickSubtract(data)
+					}
+					handleClickRemove={(data) => props.handleClickRemove(data)}
+					key={nanoid()}
+				/>
+			);
 		});
+		return cartElements;
+	}
 
-		// returns cart item will all the needed data
-		return (
-			<CartItem
-				itemsData={thisItemData}
-				quantity={item.quantity}
-				id={item.id}
-				handleClickAdd={(data) => props.handleClickAdd(data)}
-				handleClickSubtract={(data) => props.handleClickSubtract(data)}
-				handleClickRemove={(data) => props.handleClickRemove(data)}
-				key={nanoid()}
-			/>
-		);
-	});
+	// create all elements
+	const cartItemsElements = createCartItemElements();
 
 	function calcTotal() {
 		let sum = 0;
